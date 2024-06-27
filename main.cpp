@@ -107,8 +107,8 @@ void svg_begin(double width, double height) {
 }
 
 void
-svg_rect(double x, double y, double width, double height) {
-    cout << "<rect x='" << x << "' y='" << y << "' width='" << width << "' height='" << height << "' />";
+svg_rect(double x, double y, double width, double height, string stroke = "black", string fill = "white") {
+    cout << "<rect x='" << x << "' y='" << y << "' width='" << width << "' height='" << height << "' stroke='" << stroke << "' fill='" << fill << "' />";
 }
 
 void
@@ -127,8 +127,13 @@ show_histogram_svg(const vector<size_t>& bins) {
     const auto BLOCK_WIDTH = 10;
     
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
-    svg_text(TEXT_LEFT, TEXT_BASELINE, to_string(bins[0]));
-    svg_rect(TEXT_WIDTH, 0, bins[0] * BLOCK_WIDTH, BIN_HEIGHT);
+    double top = 0;
+    for (size_t bin : bins) {
+        const double bin_width = BLOCK_WIDTH * bin;
+        svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
+        svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT);
+        top += BIN_HEIGHT;
+    }
     svg_end();
 }
 
