@@ -8,7 +8,7 @@
 using namespace std;
 
 const size_t SCREEN_WIDTH = 80;
-const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
+const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1 - 3;
 
 vector<double>
 input_numbers(size_t count) {
@@ -94,7 +94,7 @@ int main() {
     const auto bins = make_histogram(bin_count, numbers, number_count);
     
 //    show_histogram_text(bins, bin_count, number_count);
-    show_histogram_svg(bins, MAX_ASTERISK);
+    show_histogram_svg(bins, MAX_ASTERISK, number_count);
     
     return 0;
 }
